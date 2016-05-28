@@ -77,5 +77,5 @@ echo "/opt/indico" | python setup.py develop_config
 yes | cp /vagrant/confs/etc/*.conf /vagrant/opt/indico-src/etc/
 yes | cp /vagrant/manifests/run_indico.sh /vagrant/opt/
 chmod 777 /vagrant/opt/run_indico.sh
-
+sudo chown vagrant /opt/indico
 
