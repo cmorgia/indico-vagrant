@@ -16,7 +16,7 @@ sudo pip install --upgrade pip
 # Install other dev libs required by Indico
 sudo yum -y install psmisc zlib-devel openssl-devel bzip2-devel python-devel 
 sudo yum -y install libxml2-devel libxslt-devel libffi-devel libjpeg-devel
-sudo yum -y install mod_wsgi mod_xsendfile tex
+sudo yum -y install mod_wsgi mod_xsendfile tex cups cups-client cups-devel
 
 # Install some missing stuff for PDF on-the-fly generation
 sudo cp -R /vagrant/packages/commonstaff /usr/share/texlive/texmf/tex/latex/
@@ -57,7 +57,7 @@ pip install pytz==2014.10
 #sudo pip install --upgrade webassets
 
 # Download latest Indico from github
-git clone https://github.com/indico/indico.git /vagrant/opt/indico-src
+git clone https://github.com/cmorgia/indico.git /vagrant/opt/indico-src
 
 git config --global url.https://github.com/.insteadOf git://github.com/
 sudo mkdir /opt/indico

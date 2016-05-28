@@ -17,6 +17,10 @@ sudo createdb indico -U postgres
 sudo service redis start
 sudo systemctl enable redis.service
 
+# enable virtualenv
+cd /vagrant/opt
+source bin/activate
+
 # move to Indico 
 cd /vagrant/opt/indico-src
 
