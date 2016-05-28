@@ -64,6 +64,8 @@ sudo mkdir /opt/indico
 sudo chown vagrant /opt/indico
 cd /vagrant/opt/indico-src
 
+git pull
+
 # Install Indico's requirements and deps
 pip install requests
 env "PATH=$PATH" pip install -r requirements.txt
