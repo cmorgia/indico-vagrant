@@ -25,6 +25,11 @@ Requirements
 
 - Go for a long coffee (or a beer)
 
+- For UN users, if you want to restore a backup from the production environment, provided you already have an SSH alias named reg, just run:
+```
+  $ vagrant ssh -c "/vagrant/manifests/restore_from_reg.sh"
+```
+
 - When finished, just run:
 ```
   $ vagrant ssh -c "/vagrant/opt/run_indico.sh"
