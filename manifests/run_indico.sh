@@ -5,6 +5,8 @@
 cd /vagrant/opt
 source bin/activate 
 
+sudo chown -R vagrant /opt/indico
+
 # Run Zeo
 zdaemon -C /vagrant/opt/indico-src/etc/zdctl.conf restart
 
