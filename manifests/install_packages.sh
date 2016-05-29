@@ -17,6 +17,7 @@ sudo pip install --upgrade pip
 sudo yum -y install psmisc zlib-devel openssl-devel bzip2-devel python-devel 
 sudo yum -y install libxml2-devel libxslt-devel libffi-devel libjpeg-devel
 sudo yum -y install mod_wsgi mod_xsendfile tex cups cups-client cups-devel
+sudo yum -y install nodejs npm
 
 # Install some missing stuff for PDF on-the-fly generation
 sudo cp -R /vagrant/packages/commonstaff /usr/share/texlive/texmf/tex/latex/
