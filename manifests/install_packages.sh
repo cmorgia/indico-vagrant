@@ -81,6 +81,7 @@ fab setup_deps
 echo "/opt/indico" | python setup.py develop_config
 yes | cp /vagrant/confs/etc/*.conf /vagrant/opt/indico-src/etc/
 yes | cp /vagrant/manifests/run_indico.sh /vagrant/opt/
-chmod 777 /vagrant/opt/run_indico.sh
+yes | cp /vagrant/manifests/restore_from_reg.sh /vagrant/opt/
+chmod 777 /vagrant/opt/run_indico.sh /vagrant/opt/restore_from_reg.sh
 sudo chown -R vagrant /opt/indico
 
