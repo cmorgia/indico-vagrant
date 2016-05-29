@@ -67,6 +67,10 @@ cd /vagrant/opt/indico-src
 
 git pull
 
+cd ext_modules
+rm -rf node_env
+cd -
+
 # Install Indico's requirements and deps
 pip install requests
 env "PATH=$PATH" pip install -r requirements.txt
