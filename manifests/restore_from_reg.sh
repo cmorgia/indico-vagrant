@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 cd /vagrant/opt
 source bin/activate
 
