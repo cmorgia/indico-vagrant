@@ -1,3 +1,11 @@
+#Disable IPv6
+
+grep net.ipv6.conf.all.disable_ipv6 /etc/sysctl.conf || (echo "net.ipv6.conf.all.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf)
+grep net.ipv6.conf.default.disable_ipv6 /etc/sysctl.conf || (echo "net.ipv6.conf.default.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf)
+grep net.ipv6.conf.lo.disable_ipv6 /etc/sysctl.conf || (echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf)
+
+sysctl -pip
+
 # Install development tools
 sudo yum -y group install "Development Tools"
 
@@ -14,10 +22,10 @@ sudo yum -y install python-pip
 sudo pip install --upgrade pip
 
 # Install other dev libs required by Indico
-sudo yum -y install psmisc zlib-devel openssl-devel bzip2-devel python-devel 
+sudo yum -y install psmisc zlib-devel openssl-devel bzip2-devel python-devel freetds-devel
 sudo yum -y install libxml2-devel libxslt-devel libffi-devel libjpeg-devel
 sudo yum -y install mod_wsgi mod_xsendfile tex cups cups-client cups-devel
-sudo yum -y install nodejs npm vim
+sudo yum -y install nodejs npm vim mod_ssl
 
 # Install some missing stuff for PDF on-the-fly generation
 sudo cp -R /vagrant/packages/commonstaff /usr/share/texlive/texmf/tex/latex/
@@ -36,9 +44,6 @@ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
 sudo cp -f /vagrant/confs/pg_hba.conf /var/lib/pgsql/9.4/data/pg_hba.conf
 sudo chkconfig postgresql-9.4 on
 export PATH=/usr/pgsql-9.4/bin/:$PATH
-
-
-
 
 
 # Install and setup VirtualEnv
@@ -61,14 +66,13 @@ pip install pytz==2014.10
 #sudo pip install --upgrade webassets
 
 # Download latest Indico from github
-git clone https://github.com/cmorgia/indico.git /vagrant/opt/indico-src
-
 git config --global url.https://github.com/.insteadOf git://github.com/
+
+if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://github.com/cmorgia/indico.git /vagrant/opt/indico-src; fi
+
 sudo mkdir /opt/indico
 sudo chown vagrant /opt/indico
 cd /vagrant/opt/indico-src
-
-git pull
 
 cd ext_modules
 rm -rf node_env
@@ -83,8 +87,33 @@ fab setup_deps
 
 echo "/opt/indico" | python setup.py develop_config
 yes | cp /vagrant/confs/etc/*.conf /vagrant/opt/indico-src/etc/
+yes | cp /vagrant/confs/99-forensic.conf /etc/httpd/conf.modules.d/
+yes | cp /vagrant/confs/apache-indico-example.conf /etc/httpd/conf.d/indico.conf
+yes | cp -R /vagrant/confs/ssl /etc/httpd
 yes | cp /vagrant/manifests/run_indico.sh /vagrant/opt/
 yes | cp /vagrant/manifests/restore_from_reg.sh /vagrant/opt/
 chmod 777 /vagrant/opt/run_indico.sh /vagrant/opt/restore_from_reg.sh
 sudo chown -R vagrant /opt/indico
+
+# Install default plugins
+mkdir -p /vagrant/opt/indico-plugins
+cd /vagrant/opt/indico-plugins
+
+declare -A plugins
+plugins[unogshorttitle]="https://github.com/openprojects/unog-shorttitle.git"
+plugins[search]="https://github.com/cmorgia/search"
+plugins[searchunog]="https://github.com/openprojects/search_unog.git"
+plugins[unogtags]="https://github.com/openprojects/unog-tags.git"
+plugins[indicopassbooks]="https://github.com/cmorgia/indico-passbooks.git"
+plugins[unoggmeetssync]="https://github.com/openprojects/unog-gmeetssync.git"
+plugins[unogfloatingheader]="https://github.com/openprojects/unog-floatingheader.git"
+plugins[unogsystemlinks]="https://github.com/vtran99/unog-systemlinks.git"
+
+for plugin in "${!plugins[@]}" ; do
+	if [ -d "/vagrant/opt/indico-plugins/$plugin" ] ; then cd /vagrant/opt/indico-plugins/$plugin ; git pull ; else git clone "${plugins[$plugin]}" /vagrant/opt/indico-plugins/$plugin ; cd /vagrant/opt/indico-plugins/$plugin ; fi
+    python setup.py develop
+done
+
+
+
 
