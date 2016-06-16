@@ -78,6 +78,8 @@ cd ext_modules
 rm -rf node_env
 cd -
 
+python setup.py develop
+
 # Install Indico's requirements and deps
 pip install requests
 env "PATH=$PATH" pip install -r requirements.txt
