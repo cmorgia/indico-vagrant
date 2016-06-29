@@ -3,8 +3,8 @@
 cd /vagrant/opt
 source bin/activate
 
-BACKUP_FILE = $(ssh -q reg "cd /opt/new/indico-instance/backup ; ls -1tr | tail -1")
-BACKUP_NAME = $(basename $BACKUP_FILE .zip)
+BACKUP_FILE=$(ssh -q reg "cd /opt/new/indico-instance/backup ; ls -1tr | tail -1")
+BACKUP_NAME=$(basename $BACKUP_FILE .zip)
 
 if [ ! -d "/opt/indico/backup" ]; then
 	mkdir -p /opt/indico/backup
