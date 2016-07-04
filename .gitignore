@@ -6,3 +6,5 @@
 opt/
 .vagrant
 .idea
+backups/
+confs/ssl/
