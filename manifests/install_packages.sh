@@ -59,7 +59,8 @@ pip install -U celery[redis]
 # Those old versions are needed by Indico
 pip install redis==2.10.3
 pip install pytz==2014.10
-
+# ZEO 5.0.0 will require python 2.7.9
+pip install ZEO==4.2.0 
 
 # Download and install Maildump
 #sudo pip install maildump

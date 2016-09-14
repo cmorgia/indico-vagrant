@@ -12,23 +12,24 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "boxcutter/centos71"
+  config.vm.box = "bento/centos-7.1"
   
   config.vm.network "forwarded_port", guest: 8080, host: 8080
-  config.vm.network "forwarded_port", guest: 8443, host: 8443
-  config.vm.network "forwarded_port", guest: 1080, host: 1080
-  config.vm.network "forwarded_port", guest: 5432, host: 5433
-  config.vm.network "forwarded_port", guest: 631, host: 6631
+  #config.vm.network "forwarded_port", guest: 8443, host: 8443
+  config.vm.network "forwarded_port", guest: 1080, host: 1081
+  config.vm.network "forwarded_port", guest: 5432, host: 5434
+  config.vm.network "forwarded_port", guest: 631, host: 6632
   
   config.vm.provider "virtualbox" do |vb|
-        vb.customize ["modifyvm", :id, "--name", "indico-dev1" ]
-	vb.memory = 4096
-	vb.cpus = 4
+        vb.customize ["modifyvm", :id, "--name", "vagrant-dev2" ]
+	vb.memory = 2048
+	vb.cpus = 2
   end
 
   #config.vm.network "public_network"
   
-  
+  config.ssh.username = 'vagrant'
+  config.ssh.password = 'vagrant'
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -87,9 +88,9 @@ Vagrant.configure("2") do |config|
   #SHELL
 
   # Install needed packages
-  config.vm.provision "shell", path: "manifests/install_packages.sh"
+  #config.vm.provision "shell", path: "manifests/install_packages.sh"
 
 
   # Start services
-  config.vm.provision "shell", path: "manifests/start_services.sh"
+  #config.vm.provision "shell", path: "manifests/start_services.sh"
 end
