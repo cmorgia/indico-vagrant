@@ -69,7 +69,7 @@ pip install ZEO==4.2.0
 # Download latest Indico from github
 git config --global url.https://github.com/.insteadOf git://github.com/
 
-if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://github.com/cmorgia/indico.git /vagrant/opt/indico-src; fi
+if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
 
 sudo mkdir /opt/indico
 sudo chown vagrant /opt/indico
