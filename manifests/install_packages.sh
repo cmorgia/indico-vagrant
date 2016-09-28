@@ -103,14 +103,16 @@ mkdir -p /vagrant/opt/indico-plugins
 cd /vagrant/opt/indico-plugins
 
 declare -A plugins
-plugins[unogshorttitle]="https://github.com/openprojects/unog-shorttitle.git"
-plugins[search]="https://github.com/cmorgia/search"
-plugins[searchunog]="https://github.com/openprojects/search_unog.git"
-plugins[unogtags]="https://github.com/openprojects/unog-tags.git"
-plugins[indicopassbooks]="https://github.com/cmorgia/indico-passbooks.git"
-plugins[unoggmeetssync]="https://github.com/openprojects/unog-gmeetssync.git"
-plugins[unogfloatingheader]="https://github.com/openprojects/unog-floatingheader.git"
-plugins[unogsystemlinks]="https://github.com/vtran99/unog-systemlinks.git"
+plugins[unogshorttitle]="https://github.com/dcmits/unog-shorttitle.git"
+plugins[search]="https://github.com/dcmits/search"
+plugins[searchunog]="https://github.com/dcmits/search_unog.git"
+plugins[unogtags]="https://github.com/dcmits/unog-tags.git"
+plugins[indicopassbooks]="https://github.com/dcmits/indico-passbooks.git"
+plugins[unoggmeetssync]="https://github.com/dcmits/unog-gmeetssync.git"
+plugins[unogfloatingheader]="https://github.com/dcmits/unog-floatingheader.git"
+plugins[unogsystemlinks]="https://github.com/dcmits/unog-systemlinks.git"
+plugins[indicoulogger]="https://github.com/dcmits/indico-ulogger.git"
+
 
 for plugin in "${!plugins[@]}" ; do
 	if [ -d "/vagrant/opt/indico-plugins/$plugin" ] ; then cd /vagrant/opt/indico-plugins/$plugin ; git pull ; else git clone "${plugins[$plugin]}" /vagrant/opt/indico-plugins/$plugin ; cd /vagrant/opt/indico-plugins/$plugin ; fi
