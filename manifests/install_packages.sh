@@ -86,10 +86,12 @@ pip install pyclamd
 git config --global url.https://github.com/.insteadOf git://github.com/
 
 # Ask for github login/pass
-read -p "Enter Github Username: " gituser
+echo -n "Enter Github Username and press [ENTER]: "
+read gituser
+read -s -p "Enter Password: " gitpass
 
 
-if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://$gituser@github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
+if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://$gituser:$gitpass@github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
 
 sudo mkdir /opt/indico
 sudo chown vagrant /opt/indico
@@ -110,9 +112,9 @@ fab setup_deps
 
 echo "/opt/indico" | python setup.py develop_config
 yes | cp /vagrant/confs/etc/*.conf /vagrant/opt/indico-src/etc/
-yes | cp /vagrant/confs/99-forensic.conf /etc/httpd/conf.modules.d/
-yes | cp /vagrant/confs/apache-indico-example.conf /etc/httpd/conf.d/indico.conf
-yes | cp -R /vagrant/confs/ssl /etc/httpd
+yes | sudo cp /vagrant/confs/99-forensic.conf /etc/httpd/conf.modules.d/
+yes | sudo cp /vagrant/confs/apache-indico-example.conf /etc/httpd/conf.d/indico.conf
+yes | sudo cp -R /vagrant/confs/ssl /etc/httpd
 yes | cp /vagrant/manifests/run_indico.sh /vagrant/opt/
 yes | cp /vagrant/manifests/restore_from_reg.sh /vagrant/opt/
 chmod 777 /vagrant/opt/run_indico.sh /vagrant/opt/restore_from_reg.sh
@@ -123,15 +125,15 @@ mkdir -p /vagrant/opt/indico-plugins
 cd /vagrant/opt/indico-plugins
 
 declare -A plugins
-plugins[unogshorttitle]="https://$gituser@github.com/dcmits/unog-shorttitle.git"
-plugins[search]="https://$gituser@github.com/dcmits/search"
-plugins[searchunog]="https://$gituser@github.com/dcmits/search_unog.git"
-plugins[unogtags]="https://$gituser@github.com/dcmits/unog-tags.git"
-plugins[indicopassbooks]="https://$gituser@github.com/dcmits/indico-passbooks.git"
-plugins[unoggmeetssync]="https://$gituser@github.com/dcmits/unog-gmeetssync.git"
-plugins[unogfloatingheader]="https://$gituser@github.com/dcmits/unog-floatingheader.git"
-plugins[unogsystemlinks]="https://$gituser@github.com/dcmits/unog-systemlinks.git"
-plugins[indicoulogger]="https://$gituser@github.com/dcmits/indico-ulogger.git"
+plugins[unogshorttitle]="https://$gituser:$gitpass@github.com/dcmits/unog-shorttitle.git"
+plugins[search]="https://$gituser:$gitpass@github.com/dcmits/search"
+plugins[searchunog]="https://$gituser:$gitpass@github.com/dcmits/search_unog.git"
+plugins[unogtags]="https://$gituser:$gitpass@github.com/dcmits/unog-tags.git"
+plugins[indicopassbooks]="https://$gituser:$gitpass@github.com/dcmits/indico-passbooks.git"
+plugins[unoggmeetssync]="https://$gituser:$gitpass@github.com/dcmits/unog-gmeetssync.git"
+plugins[unogfloatingheader]="https://$gituser:$gitpass@github.com/dcmits/unog-floatingheader.git"
+plugins[unogsystemlinks]="https://$gituser:$gitpass@github.com/dcmits/unog-systemlinks.git"
+plugins[indicoulogger]="https://$gituser:$gitpass@github.com/dcmits/indico-ulogger.git"
 
 
 for plugin in "${!plugins[@]}" ; do

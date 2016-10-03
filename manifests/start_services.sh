@@ -18,7 +18,7 @@ sudo service redis start
 sudo systemctl enable redis.service
 
 # Start ClamAV
-sudo service clamd start
+sudo service clamd@scan start
 
 # enable virtualenv
 cd /vagrant/opt

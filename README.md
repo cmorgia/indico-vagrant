@@ -15,7 +15,7 @@ Requirements
 
 - Create a folder in your Host machine and: 
 ```
-  $ git clone https://github.com/openprojects/indico-vagrant.git
+  $ git clone https://github.com/dcmits/indico-vagrant.git
 ```
 
 - Cd into the newly created folder (indico-vagrant) and:
