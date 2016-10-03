@@ -86,7 +86,7 @@ pip install pyclamd
 git config --global url.https://github.com/.insteadOf git://github.com/
 
 # Ask for github login/pass
-read -s -p "Enter Github Username: " gituser
+read -p "Enter Github Username: " gituser
 
 
 if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://$gituser@github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
