@@ -85,7 +85,11 @@ pip install pyclamd
 # Download latest Indico from github
 git config --global url.https://github.com/.insteadOf git://github.com/
 
-if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
+# Ask for github login/pass
+read -s -p "Enter Github Username: " gituser
+
+
+if cd /vagrant/opt/indico-src ; then git pull ; else git clone https://$gituser@github.com/dcmits/indico-unog.git /vagrant/opt/indico-src; fi
 
 sudo mkdir /opt/indico
 sudo chown vagrant /opt/indico
@@ -119,15 +123,15 @@ mkdir -p /vagrant/opt/indico-plugins
 cd /vagrant/opt/indico-plugins
 
 declare -A plugins
-plugins[unogshorttitle]="https://github.com/dcmits/unog-shorttitle.git"
-plugins[search]="https://github.com/dcmits/search"
-plugins[searchunog]="https://github.com/dcmits/search_unog.git"
-plugins[unogtags]="https://github.com/dcmits/unog-tags.git"
-plugins[indicopassbooks]="https://github.com/dcmits/indico-passbooks.git"
-plugins[unoggmeetssync]="https://github.com/dcmits/unog-gmeetssync.git"
-plugins[unogfloatingheader]="https://github.com/dcmits/unog-floatingheader.git"
-plugins[unogsystemlinks]="https://github.com/dcmits/unog-systemlinks.git"
-plugins[indicoulogger]="https://github.com/dcmits/indico-ulogger.git"
+plugins[unogshorttitle]="https://$gituser@github.com/dcmits/unog-shorttitle.git"
+plugins[search]="https://$gituser@github.com/dcmits/search"
+plugins[searchunog]="https://$gituser@github.com/dcmits/search_unog.git"
+plugins[unogtags]="https://$gituser@github.com/dcmits/unog-tags.git"
+plugins[indicopassbooks]="https://$gituser@github.com/dcmits/indico-passbooks.git"
+plugins[unoggmeetssync]="https://$gituser@github.com/dcmits/unog-gmeetssync.git"
+plugins[unogfloatingheader]="https://$gituser@github.com/dcmits/unog-floatingheader.git"
+plugins[unogsystemlinks]="https://$gituser@github.com/dcmits/unog-systemlinks.git"
+plugins[indicoulogger]="https://$gituser@github.com/dcmits/indico-ulogger.git"
 
 
 for plugin in "${!plugins[@]}" ; do
