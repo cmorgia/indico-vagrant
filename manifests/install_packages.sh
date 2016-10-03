@@ -46,6 +46,19 @@ sudo chkconfig postgresql-9.4 on
 export PATH=/usr/pgsql-9.4/bin/:$PATH
 
 
+# Install ClamAV
+sudo yum -y install clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd
+sudo cp -f /vagrant/confs/scan.conf /etc/clamd.d/scan.conf
+sudo mv /etc/freshclam.conf /etc/freshclam.conf.ORIG
+sudo cp -f /vagrant/confs/freshclam.conf /etc/freshclam.conf
+sudo cp -f /vagrant/confs/freshclam /etc/sysconfig/freshclam
+# Update Virus signs
+sudo freshclam -v
+# Start clamd
+sudo systemctl enable clamd@scan.service
+sudo systemctl start clamd@scan.service
+
+
 # Install and setup VirtualEnv
 sudo pip install virtualenv
 virtualenv /vagrant/opt
@@ -65,6 +78,9 @@ pip install ZEO==4.2.0
 # Download and install Maildump
 #sudo pip install maildump
 #sudo pip install --upgrade webassets
+
+# Install pyclamd
+pip install pyclamd
 
 # Download latest Indico from github
 git config --global url.https://github.com/.insteadOf git://github.com/

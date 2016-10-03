@@ -17,6 +17,9 @@ sudo createdb indico -U postgres
 sudo service redis start
 sudo systemctl enable redis.service
 
+# Start ClamAV
+sudo service clamd start
+
 # enable virtualenv
 cd /vagrant/opt
 source bin/activate
