@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "bento/centos-7.1"
   
-  config.vm.network "forwarded_port", guest: 8080, host: 8081
+  config.vm.network "forwarded_port", guest: 8081, host: 8081
   #config.vm.network "forwarded_port", guest: 8443, host: 8443
   config.vm.network "forwarded_port", guest: 1080, host: 1081
   config.vm.network "forwarded_port", guest: 5432, host: 5434
@@ -93,4 +93,9 @@ Vagrant.configure("2") do |config|
 
   # Start services
   config.vm.provision "shell", path: "manifests/start_services.sh"
+
+  # Start Indico
+  config.vm.provision "shell", path: "manifests/run_indico.sh"
+
 end
+
