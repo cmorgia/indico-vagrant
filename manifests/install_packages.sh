@@ -82,6 +82,9 @@ pip install ZEO==4.2.0
 # Install pyclamd
 pip install pyclamd
 
+# Install xlc creators
+pip install xlrd docxtpl openpyxl
+
 # Download latest Indico from github
 git config --global url.https://github.com/.insteadOf git://github.com/
 
