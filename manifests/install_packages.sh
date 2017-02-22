@@ -128,7 +128,6 @@ mkdir -p /vagrant/opt/indico-plugins
 cd /vagrant/opt/indico-plugins
 
 declare -A plugins
-plugins[unogshorttitle]="https://$gituser:$gitpass@github.com/dcmits/unog-shorttitle.git"
 plugins[search]="https://$gituser:$gitpass@github.com/dcmits/search"
 plugins[searchunog]="https://$gituser:$gitpass@github.com/dcmits/search_unog.git"
 plugins[unogtags]="https://$gituser:$gitpass@github.com/dcmits/unog-tags.git"
