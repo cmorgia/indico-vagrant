@@ -6,12 +6,25 @@ sudo systemctl disable firewalld
 DPATH="/var/lib/pgsql/9.4/data/postgresql.conf"
 OLD="#listen_addresses = 'localhost'"
 NEW="listen_addresses = '*'"
-sed -i.bak "s/$OLD/$NEW/g" $DPATH
+sudo sed -i.bak "s/$OLD/$NEW/g" $DPATH
 
 # Start Postgresql
 sudo service postgresql-9.4 start
 sudo createuser -s root -U postgres
 sudo createdb indico -U postgres
+
+# add vagrant user and give privileges
+# or:  psql -d template1       and do it manually
+psql -c "CREATE USER vagrant;"
+psql -c "GRANT ALL PRIVILEGES ON DATABASE indico to vagrant;"
+psql -c "ALTER USER vagrant WITH SUPERUSER;"
+
+# add indico user and give privileges
+psql -c "CREATE USER indico;"
+psql -c "GRANT ALL PRIVILEGES ON DATABASE indico to indico;"
+psql -c "ALTER USER indico WITH SUPERUSER;"
+
+
 
 # Start Redis
 sudo service redis start

@@ -75,6 +75,10 @@ pip install pytz==2014.10
 # ZEO 5.0.0 will require python 2.7.9
 pip install ZEO==4.2.0 
 
+# correct version of m2crypto
+pip uninstall m2crypto
+pip install m2crypto==0.25
+
 # Download and install Maildump
 #sudo pip install maildump
 #sudo pip install --upgrade webassets
