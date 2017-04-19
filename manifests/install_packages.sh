@@ -69,6 +69,10 @@ source /vagrant/opt/bin/activate
 # Install Celery and Redis bundle
 pip install -U celery[redis]
 
+
+pip install beautifulsoup4==4.2.1
+pip install bleach==1.4.3
+
 # Those old versions are needed by Indico
 pip install redis==2.10.3
 pip install pytz==2014.10
