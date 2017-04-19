@@ -35,7 +35,7 @@ sudo texhash
 sudo yum -y install httpd httpd-devel
 
 # Install additional fonts
-rpm -i http://li.nux.ro/download/nux/dextop/el7/x86_64/webcore-fonts-3.0-1.noarch.rpm
+sudo rpm -i http://li.nux.ro/download/nux/dextop/el7/x86_64/webcore-fonts-3.0-1.noarch.rpm
 
 # Install and configure Postgresql 9.4
 sudo yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-2.noarch.rpm
