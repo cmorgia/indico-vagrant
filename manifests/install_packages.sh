@@ -145,6 +145,7 @@ plugins[unogfloatingheader]="https://$gituser:$gitpass@github.com/dcmits/unog-fl
 plugins[unogsystemlinks]="https://$gituser:$gitpass@github.com/dcmits/unog-systemlinks.git"
 plugins[indicoulogger]="https://$gituser:$gitpass@github.com/dcmits/indico-ulogger.git"
 plugins[indicofilescanner]="https://$gituser:$gitpass@github.com/dcmits/indico-filescanner.git"
+plugins[unogemailmanager]="https://$gituser:$gitpass@github.com/dcmits/unog-emailmanager.git"
 
 
 for plugin in "${!plugins[@]}" ; do
