@@ -37,5 +37,5 @@ ssh -o PasswordAuthentication=no reg ls >/dev/null 2>&1
 if [ $? -eq 0 ]; then
 	echo "SSH successfully configured"
 else
-	echo "SSH configuration unsuccessful, please generate and copy your auth key manually."
+	echo "SSH configuration unsuccessful, please generate and copy your auth key manually (~/.ssh/id_rsa.pub)."
 fi
