@@ -1,3 +1,6 @@
+# Script to generate an auth key for the Indico prod server and copy this key to the server.
+# Run it from your computer to be able to connect to reg via SSH.
+
 #!/bin/bash
 
 # Create the ssh keys
@@ -34,5 +37,5 @@ ssh -o PasswordAuthentication=no reg ls >/dev/null 2>&1
 if [ $? -eq 0 ]; then
 	echo "SSH successfully configured"
 else
-	echo "SSH configuration unsuccessful"
+	echo "SSH configuration unsuccessful, please generate and copy your auth key manually."
 fi
