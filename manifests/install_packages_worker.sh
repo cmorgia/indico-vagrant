@@ -51,8 +51,10 @@ pip install -r requirements.dev.txt
 
 fab setup_deps
 
+# create Indico instance folder
+mkdir /data/opt/indico-instance
 
-
+echo "/data/opt/indico-instance" | python setup.py develop_config
 
 
 
