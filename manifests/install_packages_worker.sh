@@ -23,6 +23,12 @@ source /vagrant/opt/bin/activate
 # Install xlc creators
 pip install xlrd docxtpl openpyxl
 
+# ZEO 5.0.0 will require python 2.7.9
+pip install ZEO==4.2.0 
+
+# Install correct fabric
+pip install fabric==1.1.8
+
 # Config github
 git config --global url.https://github.com/.insteadOf git://github.com/
 
@@ -37,4 +43,16 @@ cd /data/opt/indico-src/ext_modules
 rm -rf node_env
 cd /data/opt/indico-src
 python setup.py develop
+
+# Install Indico's requirements and deps
+pip install requests
+env "PATH=$PATH" 
+pip install -r requirements.dev.txt
+
+fab setup_deps
+
+
+
+
+
 
