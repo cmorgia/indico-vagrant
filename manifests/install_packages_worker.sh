@@ -31,6 +31,10 @@ echo -n "Enter Github Username and press [ENTER]: "
 read gituser
 read -s -p "Enter Password: " gitpass
 
-
 git clone https://$gituser:$gitpass@github.com/dcmits/indico-unog.git /data/opt/indico-src
+
+cd /data/opt/indico-src/ext_modules
+rm -rf node_env
+cd /data/opt/indico-src
+python setup.py develop
 
