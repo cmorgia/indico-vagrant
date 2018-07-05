@@ -93,6 +93,9 @@ pip install pyclamd
 # Install xlc creators
 pip install xlrd docxtpl openpyxl
 
+# Install phonenumbers for Contact phone number validation
+pip install phonenumbers
+
 # Download latest Indico from github
 git config --global url.https://github.com/.insteadOf git://github.com/
 
